@@ -3,9 +3,9 @@ from TODO_list.models import TaskModel, Type, Status
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['short_de', 'description', 'status', 'type']
+    list_display = ['short_de', 'status', 'type']
     list_filter = ['status', 'type']
-    search_fields = ['type']
+    search_fields = ['status', 'type']
     fields = ['short_de', 'description', 'status', 'type', 'created_at', 'updated_at']
     readonly_fields = ['created_at', 'updated_at']
 

@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{%  block nav %}
+    <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Создать задачу</a>
+        </li>
+{% endblock %}
+{% block content %}
+    <br/><h3>Все задачи:</h3><br/>
+    <div class="row">
+    {% for task in tasks %}
+    <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ task.short_de }}</h4>
+                        <h6>{{ task.status }}</h6>
+                        <a href="#">Просмотреть</a>
+                    </div>
+                </div>
+            </div>
+{% endfor %}
+    </div>
+{% endblock %}
