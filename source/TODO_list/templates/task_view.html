@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Редактировать</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Удалить</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <br/><h3>{{ task.short_de }}</h3><br/>
+    <p>Описание: {{ task.description }}</p><br/>
+    <p>Статус: {{ task.status }}</p><br/>
+    <p>Тип: {{ task.type }}</p>
+{% endblock %}

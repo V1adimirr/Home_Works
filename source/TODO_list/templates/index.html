@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ task.short_de }}</h4>
                         <h6>{{ task.status }}</h6>
-                        <a href="#">Просмотреть</a>
+                        <a href="{% url "view" task.pk %}">Просмотреть</a>
                     </div>
                 </div>
             </div>
