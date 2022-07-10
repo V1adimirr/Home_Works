@@ -40,3 +40,43 @@ class CreateTask(View):
             return redirect("view", pk=new_task.pk)
         return render(request, 'task_create.html', {'form': form})
 
+
+class DeleteTask(View):
+
+    def get(self, request, **kwargs):
+        pk = kwargs.get('pk')
+        task = get_object_or_404(TaskModel, pk=pk)
+        return render(request, "task_delete.html", {"task": task})
+
+    def post(self, request, **kwargs):
+        pk = kwargs.get('pk')
+        task = get_object_or_404(TaskModel, pk=pk)
+        task.delete()
+        return redirect("index")
+
+
+class UpdateTask(View):
+
+    def get(self, request, **kwargs):
+        pk = kwargs.get('pk')
+        task = get_object_or_404(TaskModel, pk=pk)
+        form = TaskForm(initial={
+            "short_de": task.short_de,
+            "description": task.description,
+            "status": task.status,
+            "type": task.type,
+        })
+        return render(request, "task_update.html", {"form": form})
+
+    def post(self, request, **kwargs):
+        pk = kwargs.get('pk')
+        task = get_object_or_404(TaskModel, pk=pk)
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.short_de = form.cleaned_data.get("short_de")
+            task.description = form.cleaned_data.get("description")
+            task.status = form.cleaned_data.get("status")
+            task.type = form.cleaned_data.get("type")
+            task.save()
+            return redirect("view", pk=task.pk)
+        return render(request, "task_update.html", {"form": form})

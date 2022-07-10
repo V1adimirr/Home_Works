@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block nav %}
+{% endblock %}
+{% block title %}Удаление Задачи{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+    {% csrf_token %}
+    <h6>Вы уверены что хотите удалить задачу: {{ task.short_de }}</h6>
+    <button type="submit" name="Yes" value="Yes">Да</button>
+</form>
+    <button type="submit">
+        <a href="{% url "view" task.pk %}">Нет</a>
+    </button>
+{% endblock %}
