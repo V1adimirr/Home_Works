@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {%  block nav %}
     <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Создать задачу</a>
+          <a class="nav-link active" aria-current="page" href="{% url "create" %}">Создать задачу</a>
         </li>
 {% endblock %}
 {% block content %}
