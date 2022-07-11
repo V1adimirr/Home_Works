@@ -14,8 +14,8 @@ class TaskModel(BaseModel):
     description = models.TextField(max_length=2000, null=False, blank=False, verbose_name='Описание')
     status = models.ForeignKey("TODO_list.Status", related_name='Status', on_delete=models.PROTECT,
                                verbose_name='Статус')
-    type = models.ForeignKey("TODO_list.Type", related_name='Type', on_delete=models.PROTECT,
-                             verbose_name='Тип')
+    type = models.ManyToManyField("TODO_list.Type", related_name='Type', through='TODO_list.TaskType',
+                                  through_fields=('task_name', 'type_name'))
 
     def __str__(self):
         return f"{self.id}. {self.short_de} : {self.status}"
@@ -24,6 +24,15 @@ class TaskModel(BaseModel):
         db_table = 'Tasks'
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+
+class TaskType(models.Model):
+    task_name = models.ForeignKey('TODO_list.TaskModel', related_name='task_type', on_delete=models.CASCADE,
+                                  verbose_name='Задача')
+    type_name = models.ForeignKey('TODO_list.Type', related_name='name_type', on_delete=models.CASCADE,
+                                  verbose_name='Имя типа')
+
+    def __str__(self):
+        return "{} | {}".format(self.task_name, self.type_name)
 
 
 class Type(BaseModel):

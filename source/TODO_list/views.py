@@ -34,9 +34,9 @@ class CreateTask(View):
             short_de = form.cleaned_data.get('short_de')
             description = form.cleaned_data.get('description')
             status = form.cleaned_data.get('status')
-            types = form.cleaned_data.get('type')
-            new_task = TaskModel.objects.create(short_de=short_de, description=description, status=status,
-                                                type=types)
+            type = form.cleaned_data.pop("type")
+            new_task = TaskModel.objects.create(short_de=short_de, description=description, status=status)
+            new_task.type.set(type)
             return redirect("view", pk=new_task.pk)
         return render(request, 'task_create.html', {'form': form})
 
@@ -64,7 +64,7 @@ class UpdateTask(View):
             "short_de": task.short_de,
             "description": task.description,
             "status": task.status,
-            "type": task.type,
+            "type": task.type.all(),
         })
         return render(request, "task_update.html", {"form": form})
 
@@ -76,7 +76,7 @@ class UpdateTask(View):
             task.short_de = form.cleaned_data.get("short_de")
             task.description = form.cleaned_data.get("description")
             task.status = form.cleaned_data.get("status")
-            task.type = form.cleaned_data.get("type")
+            task.type.set(form.cleaned_data.pop("type"))
             task.save()
             return redirect("view", pk=task.pk)
         return render(request, "task_update.html", {"form": form})
