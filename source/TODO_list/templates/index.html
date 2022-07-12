@@ -14,7 +14,9 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ task.short_de }}</h4>
                         <h6>{{ task.status }}</h6>
-                        <h6>{{ task.type }}</h6>
+                        <h6>{% for type in task.types.all %}{{ type.type }}
+                        {% endfor %}</h6>
+                    <p>{{ task.updated_at }}</p>
                         <a href="{% url "view" task.pk %}" style=" color : darkorange; text-decoration: none">Просмотреть</a>
                     </div>
                 </div>

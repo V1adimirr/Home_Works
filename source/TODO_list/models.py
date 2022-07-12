@@ -14,7 +14,7 @@ class TaskModel(BaseModel):
     description = models.TextField(max_length=2000, null=False, blank=False, verbose_name='Описание')
     status = models.ForeignKey("TODO_list.Status", related_name='Status', on_delete=models.PROTECT,
                                verbose_name='Статус')
-    type = models.ManyToManyField("TODO_list.Type", related_name='Type', through='TODO_list.TaskType',
+    types = models.ManyToManyField("TODO_list.Type", related_name='Type', through='TODO_list.TaskType',
                                   through_fields=('task_name', 'type_name'))
 
     def __str__(self):
