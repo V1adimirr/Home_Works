@@ -8,7 +8,7 @@
     <form action="" method="post">
     {% csrf_token %}
     <h6>Вы уверены что хотите удалить задачу: {{ task.short_de }}</h6>
-    <button type="submit" name="Yes" value="Yes">Да</button>
+    <button type="submit" name="Yes" value="Yes">Да.</button>
 </form>
     <button type="submit">
         <a href="{% url "view" task.pk %}"  style=" color : black; text-decoration: none" >Нет</a>
