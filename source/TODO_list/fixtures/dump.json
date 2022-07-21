@@ -65,6 +65,32 @@
     }
 },
 {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2022-07-20T14:26:51.274Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "4",
+        "object_repr": "Close",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2022-07-20T14:26:56.661Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "8",
+        "object_repr": "8. Просто задача : Close",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u0442\\u0430\\u0442\\u0443\\u0441\"]}}]"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -429,7 +455,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$320000$GA2Gn9WE91Uzc9EV1gNqZU$0QcVg53zZE0xLxc12VJBDHZfw3nD4T/C1IYWJBoO0ws=",
-        "last_login": "2022-07-11T20:00:21.167Z",
+        "last_login": "2022-07-13T18:44:08.548Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -531,25 +557,220 @@
     }
 },
 {
+    "model": "sessions.session",
+    "pk": "kiqg96u8htjkk4srzw5do88l1u0n2bz9",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGllex19Kes5g7fqDA8iW4qRC3B0ipYD2zcx7sYDbWsM28hLmxM4M2Ol3I4yP3HaQ7thuncfe1mUmviv8oINfe8rPy-H-HVQc9VtHq7MjmLTPAE5TJOeE1xhLEla7VMgoQcUospm8MnGSFlECSdJlgsLeH-nuODI:1oBhLE:_4RboP1pKsN2QtopNqtTvPLSz-lcs24W-ssMMtI8HC0",
+        "expire_date": "2022-07-27T18:44:08.554Z"
+    }
+},
+{
     "model": "TODO_list.taskmodel",
     "pk": 2,
     "fields": {
         "created_at": "2022-07-11T20:37:33.124Z",
-        "updated_at": "2022-07-11T20:37:33.124Z",
+        "updated_at": "2022-07-21T19:23:57.875Z",
         "short_de": "Обеспечение безопасности сети",
         "description": "Проведение курсов повышения \r\nквалификации для сотрудников \r\nотдела информационной безопасности",
+        "status": 4
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 4,
+    "fields": {
+        "created_at": "2022-07-12T12:24:48.257Z",
+        "updated_at": "2022-07-13T17:45:27.709Z",
+        "short_de": "Заполнение амбара",
+        "description": "вот",
+        "status": 1
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 5,
+    "fields": {
+        "created_at": "2022-07-12T12:31:12.963Z",
+        "updated_at": "2022-07-12T17:43:09.088Z",
+        "short_de": "Просто задача",
+        "description": "задача",
+        "status": 1
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 7,
+    "fields": {
+        "created_at": "2022-07-13T16:58:18.859Z",
+        "updated_at": "2022-07-13T18:19:32.163Z",
+        "short_de": "Просто задача",
+        "description": "vsx",
         "status": 2
     }
 },
 {
     "model": "TODO_list.taskmodel",
-    "pk": 3,
+    "pk": 8,
     "fields": {
-        "created_at": "2022-07-12T12:09:25.826Z",
-        "updated_at": "2022-07-12T12:09:25.826Z",
-        "short_de": "Обеспечение безопасности сети",
-        "description": "задача",
+        "created_at": "2022-07-13T16:59:53.219Z",
+        "updated_at": "2022-07-20T14:26:56.661Z",
+        "short_de": "Просто задача",
+        "description": "vsx",
+        "status": 4
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 14,
+    "fields": {
+        "created_at": "2022-07-20T15:39:58.624Z",
+        "updated_at": "2022-07-20T15:39:58.624Z",
+        "short_de": "Новая задача",
+        "description": "Описание новой задачи, которое длинее ста символов и  соответствует всем требованиям валидации на данном этапе выполнения домашнего задания, но это не точно!\r\nP.s но лучше отключить валидацию",
+        "status": 4
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 15,
+    "fields": {
+        "created_at": "2022-07-21T19:20:22.538Z",
+        "updated_at": "2022-07-21T19:22:38.714Z",
+        "short_de": "Обеспечение формы",
+        "description": "Формы поиска часто отправляются GET-запросом. Это объясняется тем, что в этом случае данные из формы попадают в строку запроса в URL, а значит такой URL можно сохранить или передать другому человеку, и он увидит результаты того же самого поискового запроса. Сами результаты, правда, могут отличаться, в зависимости от прошедшего времени между сохранением ссылки и повторным открытием.",
+        "status": 4
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 16,
+    "fields": {
+        "created_at": "2022-07-21T19:46:41.468Z",
+        "updated_at": "2022-07-21T19:46:41.468Z",
+        "short_de": "Какая то задача",
+        "description": "С каким то описанием",
         "status": 1
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 17,
+    "fields": {
+        "created_at": "2022-07-21T19:47:20.018Z",
+        "updated_at": "2022-07-21T19:47:20.018Z",
+        "short_de": "Опять задача",
+        "description": "Опять описание",
+        "status": 4
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 18,
+    "fields": {
+        "created_at": "2022-07-21T19:49:11.324Z",
+        "updated_at": "2022-07-21T19:49:11.324Z",
+        "short_de": "Задача",
+        "description": "Описание Задачи",
+        "status": 4
+    }
+},
+{
+    "model": "TODO_list.taskmodel",
+    "pk": 19,
+    "fields": {
+        "created_at": "2022-07-21T19:50:07.055Z",
+        "updated_at": "2022-07-21T19:50:07.055Z",
+        "short_de": "Краткое описание",
+        "description": "Полное описание",
+        "status": 2
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 5,
+    "fields": {
+        "task_name": 5,
+        "type_name": 3
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 7,
+    "fields": {
+        "task_name": 2,
+        "type_name": 2
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 16,
+    "fields": {
+        "task_name": 8,
+        "type_name": 1
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 18,
+    "fields": {
+        "task_name": 4,
+        "type_name": 1
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 20,
+    "fields": {
+        "task_name": 7,
+        "type_name": 2
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 26,
+    "fields": {
+        "task_name": 14,
+        "type_name": 1
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 27,
+    "fields": {
+        "task_name": 15,
+        "type_name": 3
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 28,
+    "fields": {
+        "task_name": 16,
+        "type_name": 1
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 29,
+    "fields": {
+        "task_name": 17,
+        "type_name": 2
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 30,
+    "fields": {
+        "task_name": 18,
+        "type_name": 3
+    }
+},
+{
+    "model": "TODO_list.tasktype",
+    "pk": 31,
+    "fields": {
+        "task_name": 19,
+        "type_name": 1
     }
 },
 {
@@ -604,6 +825,15 @@
         "created_at": "2022-07-11T20:15:36.784Z",
         "updated_at": "2022-07-11T20:15:36.784Z",
         "status": "Done"
+    }
+},
+{
+    "model": "TODO_list.status",
+    "pk": 4,
+    "fields": {
+        "created_at": "2022-07-20T14:26:51.273Z",
+        "updated_at": "2022-07-20T14:26:51.273Z",
+        "status": "Close"
     }
 }
 ]

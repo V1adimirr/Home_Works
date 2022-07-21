@@ -1,18 +1,46 @@
+from django.db.models.query_utils import Q
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.utils.http import urlencode
 from django.views.generic.base import View
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 
-from TODO_list.forms import TaskForm
+from TODO_list.forms import TaskForm, SearchForm
 from TODO_list.models import TaskModel
 from TODO_list.base_view import FormView as CustomFormView
 
 
-class IndexView(View):
+class IndexView(ListView):
+    model = TaskModel
+    template_name = "index.html"
+    context_object_name = "tasks"
+    ordering = ("-updated_at",)
+    paginate_by = 6
 
-    def get(self, request):
-        task = TaskModel.objects.order_by("-updated_at")
-        context = {"tasks": task}
-        return render(request, "index.html", context)
+    def get(self, request, *args, **kwargs):
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context["form"] = self.form
+        if self.search_value:
+            query = urlencode({"search": self.search_value})
+            context["query"] = query
+        return context
+
+    def get_queryset(self):
+        if self.search_value:
+            return TaskModel.objects.filter(Q(short_de__icontains=self.search_value) |
+                                            Q(description__icontains=self.get_search_value()))
+        return TaskModel.objects.all()
+
+    def get_search_form(self):
+        return SearchForm(self.request.GET)
+
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data.get("search")
 
 
 class TaskView(View):
@@ -64,7 +92,7 @@ class UpdateTask(FormView):
         return get_object_or_404(TaskModel, pk=self.kwargs.get("pk"))
 
     def get_success_url(self):
-        return reverse("task_view.html", kwargs={"pk": self.task.pk})
+        return reverse("view", kwargs={"pk": self.task.pk})
 
     def get_initial(self):
         initial = {}

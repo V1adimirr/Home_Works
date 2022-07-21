@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Главная{% endblock %}
 {%  block nav %}
-    <li class="nav-item">
+     <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url "create" %}">Создать задачу</a>
         </li>
+{% endblock %}
+{% block search %}
+     {% include "partial/search.html" %}
 {% endblock %}
 {% block content %}
     <br/><h3>Все задачи:</h3><br/>
@@ -22,5 +25,8 @@
                 </div>
             </div>
 {% endfor %}
+    {% if is_paginated %}
+        {% include "partial/pagination.html" %}
+    {% endif %}
     </div>
 {% endblock %}
