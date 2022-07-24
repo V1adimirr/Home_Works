@@ -9,13 +9,22 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class Project(models.Model):
+    name_project = models.CharField(max_length=50, verbose_name="Имя проекта")
+    project_de = models.TextField(max_length=1000, verbose_name="Описание проекта")
+    created_time = models.DateField(verbose_name="Дата создания")
+    updated_time = models.DateField(null=True, blank=True,  verbose_name="Дата окончания")
+    task_project = models.ForeignKey("TODO_list.TaskModel", null=True, blank=True, related_name="Task_project",
+                                     on_delete=models.CASCADE, verbose_name="Задачи проекта")
+
+
 class TaskModel(BaseModel):
     short_de = models.CharField(max_length=100, verbose_name='Краткое описание')
     description = models.TextField(max_length=2000, null=False, blank=False, verbose_name='Описание')
     status = models.ForeignKey("TODO_list.Status", related_name='Status', on_delete=models.PROTECT,
                                verbose_name='Статус')
     types = models.ManyToManyField("TODO_list.Type", related_name='Type', through='TODO_list.TaskType',
-                                  through_fields=('task_name', 'type_name'))
+                                   through_fields=('task_name', 'type_name'))
 
     def __str__(self):
         return f"{self.id}. {self.short_de} : {self.status}"
@@ -24,6 +33,7 @@ class TaskModel(BaseModel):
         db_table = 'Tasks'
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+
 
 class TaskType(models.Model):
     task_name = models.ForeignKey('TODO_list.TaskModel', related_name='task_type', on_delete=models.CASCADE,

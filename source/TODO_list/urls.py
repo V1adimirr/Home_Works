@@ -1,6 +1,6 @@
 from django.urls import path
 
-from TODO_list.views import IndexView, TaskView, CreateTask, DeleteTask, UpdateTask
+from TODO_list.views.tasks_views import IndexView, TaskView, CreateTask, DeleteTask, UpdateTask
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
