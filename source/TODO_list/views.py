@@ -11,7 +11,7 @@ from TODO_list.base_view import FormView as CustomFormView
 
 class IndexView(ListView):
     model = TaskModel
-    template_name = "index.html"
+    template_name = "Tasks/index.html"
     context_object_name = "tasks"
     ordering = ("-updated_at",)
     paginate_by = 6
@@ -49,7 +49,7 @@ class TaskView(View):
         pk = kwargs.get("pk")
         task = get_object_or_404(TaskModel, pk=pk)
         kwargs["task"] = task
-        return render(request, "task_view.html", kwargs)
+        return render(request, "Tasks/task_view.html", kwargs)
 
 
 class CreateTask(CustomFormView):
@@ -71,7 +71,7 @@ class DeleteTask(View):
     def get(self, request, **kwargs):
         pk = kwargs.get('pk')
         task = get_object_or_404(TaskModel, pk=pk)
-        return render(request, "task_delete.html", {"task": task})
+        return render(request, "Tasks/task_delete.html", {"task": task})
 
     def post(self, request, **kwargs):
         pk = kwargs.get('pk')
@@ -82,7 +82,7 @@ class DeleteTask(View):
 
 class UpdateTask(FormView):
     form_class = TaskForm
-    template_name = "task_update.html"
+    template_name = "Tasks/task_update.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.task = self.get_object()
