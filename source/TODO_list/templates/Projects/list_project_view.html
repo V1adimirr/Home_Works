@@ -2,7 +2,7 @@
 {% block title %}Проекты{% endblock %}
 {%  block nav %}
      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Добавить проект</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'create_project' %}">Добавить проект</a>
         </li>
 {% endblock %}
 {% block search %}

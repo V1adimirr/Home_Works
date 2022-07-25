@@ -2,6 +2,9 @@
 
 {% block title %}Просмотр Задачи{% endblock %}
 {% block nav %}
+     <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'create'  %}">Добавить задачу</a>
+    </li>
     <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'update' task.pk %}">Редактировать</a>
     </li>
@@ -17,5 +20,6 @@
     <p>Статус: {{ task.status }}</p><br/>
     <p>Тип: {% for type in task.types.all %}{{ type.type }}
                         {% endfor %}</p>
+
      <a href="{% url "list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}

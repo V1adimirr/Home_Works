@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Просмотр проекта{% endblock %}
+
+{% block content %}
+    <br/><h3>{{ project.name_project }}</h3><br/>
+    <p>Описание: {{ project.project_de }}</p><br/>
+    <p>Время создания: {{ project.created_time }}</p><br/>
+    <p><a href="{% url 'view' project.task_project.pk %}" style=" color : darkorange; text-decoration: none">
+        <strong> Задачи: </strong> {{ project.task_project.short_de }} </a></p>
+
+     <a href="{% url 'list_project_view' %}" style=" color : darkorange; text-decoration: none">На главную</a>
+{% endblock %}

@@ -54,7 +54,7 @@ class TaskView(View):
 
 class CreateTask(CustomFormView):
     form_class = TaskForm
-    template_name = "task_create.html"
+    template_name = "Tasks/task_create.html"
 
     def form_valid(self, form):
         type = form.cleaned_data.pop("types")
@@ -77,7 +77,7 @@ class DeleteTask(View):
         pk = kwargs.get('pk')
         task = get_object_or_404(TaskModel, pk=pk)
         task.delete()
-        return redirect("index")
+        return redirect("list_project_view")
 
 
 class UpdateTask(FormView):

@@ -36,5 +36,8 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ['name_project', 'project_de', 'created_time', 'updated_time', 'task_project']
         widgets = {
-            "project_de": widgets.Textarea(attrs={"cols": 20, "rows": 6})
+            "project_de": forms.Textarea(attrs={"cols": 20, "rows": 6}),
+            "created_time": forms.SelectDateWidget,
+            "updated_time": forms.SelectDateWidget,
+
         }
