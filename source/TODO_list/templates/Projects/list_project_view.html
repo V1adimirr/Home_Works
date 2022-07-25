@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Проекты{% endblock %}
+{%  block nav %}
+     <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Добавить проект</a>
+        </li>
+{% endblock %}
+{% block search %}
+     {% include "partial/search.html" %}
+{% endblock %}
+{% block content %}
+    <br/><h3>Все проекты:</h3><br/>
+    <div class="row">
+    {% for project in projects %}
+    <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ project.name_project }}</h4>
+                        <h6>{{ project.created_time }}</h6>
+                        <a href="{% url 'detail_project_view' project.pk %}" style=" color : darkorange; text-decoration: none">Просмотреть</a>
+                    </div>
+                </div>
+            </div>
+{% endfor %}
+    {% if is_paginated %}
+        {% include "partial/pagination.html" %}
+    {% endif %}
+    </div>
+{% endblock %}

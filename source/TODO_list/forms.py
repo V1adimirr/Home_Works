@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import widgets
 
-from TODO_list.models import TaskModel
+from TODO_list.models import TaskModel, Project
 
 
 class TaskForm(forms.ModelForm):
@@ -29,3 +29,12 @@ class TaskForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=20, required=False, label="Поиск")
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['name_project', 'project_de', 'created_time', 'updated_time', 'task_project']
+        widgets = {
+            "project_de": widgets.Textarea(attrs={"cols": 20, "rows": 6})
+        }
