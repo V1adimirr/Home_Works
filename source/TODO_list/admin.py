@@ -6,7 +6,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ['name_project', 'created_time', 'updated_time']
     list_filter = ['name_project']
     search_fields = ['name_project', 'created_time']
-    fields = ['name_project', 'project_de', 'created_time', 'updated_time', 'task_project']
+    fields = ['name_project', 'project_de', 'created_time', 'updated_time']
 
 
 admin.site.register(Project, ProjectAdmin)
@@ -16,7 +16,7 @@ class TaskAdmin(admin.ModelAdmin):
     list_display = ['short_de', 'status']
     list_filter = ['status']
     search_fields = ['status', 'type']
-    fields = ['short_de', 'description', 'status', 'created_at', 'updated_at']
+    fields = ['short_de', 'description', 'status', 'created_at', 'updated_at', 'project']
     readonly_fields = ['created_at', 'updated_at']
 
 

@@ -2,9 +2,6 @@
 
 {% block title %}Просмотр Задачи{% endblock %}
 {% block nav %}
-     <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'create'  %}">Добавить задачу</a>
-    </li>
     <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'update' task.pk %}">Редактировать</a>
     </li>

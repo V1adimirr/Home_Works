@@ -8,7 +8,7 @@ from TODO_list.models import TaskModel, Project
 class TaskForm(forms.ModelForm):
     class Meta:
         model = TaskModel
-        fields = ["short_de", "description", "status", "types"]
+        fields = ["short_de", "description", "status", "types", 'project']
         widgets = {
             "types": widgets.CheckboxSelectMultiple,
             "description": widgets.Textarea(attrs={"cols": 20, "rows": 6})
@@ -34,7 +34,7 @@ class SearchForm(forms.Form):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name_project', 'project_de', 'created_time', 'updated_time', 'task_project']
+        fields = ['name_project', 'project_de', 'created_time', 'updated_time']
         widgets = {
             "project_de": forms.Textarea(attrs={"cols": 20, "rows": 6}),
             "created_time": forms.SelectDateWidget,
