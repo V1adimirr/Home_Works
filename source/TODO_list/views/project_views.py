@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from TODO_list.forms import ProjectForm
-from TODO_list.models import Project, TaskModel
+from TODO_list.models import Project
 
 
 class IndexProjectView(ListView):
@@ -15,11 +15,8 @@ class IndexProjectView(ListView):
 
 
 class DetailProjectView(DetailView):
-    def get(self, request, **kwargs):
-        pk = kwargs.get("pk")
-        project = get_object_or_404(Project, pk=pk)
-        kwargs["project"] = project
-        return render(request, "Projects/detail_project_view.html", kwargs)
+    template_name = 'Projects/detail_project_view.html'
+    model = Project
 
 
 class CreateProjectView(CreateView):
@@ -28,3 +25,19 @@ class CreateProjectView(CreateView):
 
     def get_success_url(self):
         return reverse('detail_project_view', kwargs={'pk': self.object.pk})
+
+class UpdateProjectView(UpdateView):
+    model = Project
+    template_name = 'Projects/update_project.html'
+    form_class = ProjectForm
+    context_key = 'project'
+
+    def get_success_url(self):
+        return reverse('detail_project_view', kwargs={'pk': self.object.pk})
+
+
+class DeleteProjectView(DeleteView):
+    template_name = 'Projects/delete_project.html'
+    model = Project
+    context_object_name = 'project'
+    success_url = reverse_lazy('list_project_view')

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% csrf_token %}
+
+{% block title %}Изменение проекта{% endblock %}
+
+{% block content %}
+    <h3>Изменение проекта</h3>
+    <form action="" method="post">
+        {% include "partial/form.html" with button_text="Изменить" %}
+    </form>
+    <a href="{% url "list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
+{% endblock %}

@@ -5,6 +5,12 @@
      <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'create'  %}">Добавить задачу</a>
     </li>
+    <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'update_project' project.pk %}">Изменить проект</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'delete_project' project.pk %}">Удалить проект</a>
+    </li>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +23,7 @@
     <p>Дата окончания: {{ '-- -- --' }}</p><br/>
     {% endif %}
     <p><a href="{% url 'view' project.pk %}" style=" color : darkorange; text-decoration: none">
-        <strong> Задачи: </strong> {{ tasks.short_de }} </a></p>
+        <strong> Задачи: </strong> {{ projects.objects}} </a></p>
 
      <a href="{% url 'list_project_view' %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}
