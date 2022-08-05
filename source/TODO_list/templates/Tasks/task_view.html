@@ -2,12 +2,14 @@
 
 {% block title %}Просмотр Задачи{% endblock %}
 {% block nav %}
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'update' task.pk %}">Редактировать</a>
     </li>
     <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'delete' task.pk %}">Удалить</a>
     </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}

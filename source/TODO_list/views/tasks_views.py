@@ -2,7 +2,7 @@ from django.db.models.query_utils import Q
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.utils.http import urlencode
 from django.views.generic.base import View
-from django.views.generic import FormView, ListView
+from django.views.generic import FormView, ListView, CreateView
 
 from TODO_list.forms import TaskForm, SearchForm
 from TODO_list.models import TaskModel

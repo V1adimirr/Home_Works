@@ -17,6 +17,15 @@
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         {% block nav %}
         {% endblock %}
+      {% if request.user.is_authenticated %}
+          <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url "logout" %}">Выйти</a>
+        </li>
+      {% else %}
+          <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url "login" %}">Войти</a>
+        </li>
+      {% endif %}
       </ul>
     {% block search %}
     {% endblock %}

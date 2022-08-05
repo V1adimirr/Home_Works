@@ -517,7 +517,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$320000$50bNdCZKsEfr9lufgURZgd$4OnhiCYPiCy2hxPgtmAy9TRkma6Q8gcs2+CAA46l088=",
-        "last_login": "2022-07-28T16:28:44.547Z",
+        "last_login": "2022-08-05T17:48:11.793Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -616,6 +616,14 @@
     "fields": {
         "app_label": "TODO_list",
         "model": "project"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "9px0zyjs98tbit25l92erdifdbzked3t",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQRP-FsyGlzcri0bvfQGB3kaqBpLQn479Lkx70OPPmzVv5sK3Zb00WP7O6KKNOv10M9JSyA36Ecq-aalmXOep9og_a9K2yvK7H9u8gh5a7jYlJAOIoMjp2Z-MmwpTMgJMgI_UnYwGmgYHRhtRjBMeUpGvsrPp8AQp0OT8:1oK1Qh:J48v1aMmugqaZvjuaMTzA7pL-1Libx6QlhFCN5fOY-c",
+        "expire_date": "2022-08-19T17:48:11.798Z"
     }
 },
 {
