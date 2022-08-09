@@ -6,5 +6,5 @@
     <form action="" method="post">
       {% include "partial/form.html"  with button_text="Изменить"%}
     </form>
-    <a href="{% url "list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
+    <a href="{% url "TODO_list:list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}

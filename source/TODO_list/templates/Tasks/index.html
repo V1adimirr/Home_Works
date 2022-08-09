@@ -3,7 +3,7 @@
 {%  block nav %}
     {% if request.user.is_authenticated %}
      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url "create" %}">Создать задачу</a>
+          <a class="nav-link active" aria-current="page" href="{% url "TODO_list:create" %}">Создать задачу</a>
         </li>
     {% endif %}
 {% endblock %}
@@ -22,7 +22,7 @@
                         <h6>{% for type in task.types.all %}{{ type.type }}
                         {% endfor %}</h6>
                     <p>{{ task.updated_at }}</p>
-                        <a href="{% url "view" task.pk %}" style=" color : darkorange; text-decoration: none">Просмотреть</a>
+                        <a href="{% url "TODO_list:view" task.pk %}" style=" color : darkorange; text-decoration: none">Просмотреть</a>
                     </div>
                 </div>
             </div>

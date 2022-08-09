@@ -11,6 +11,6 @@
     <button type="submit" name="Yes" value="Yes">Да.</button>
 </form>
     <button type="submit">
-        <a href="{% url "detail_project_view" project.pk %}"  style=" color : black; text-decoration: none" >Нет</a>
+        <a href="{% url "TODO_list:detail_project_view" project.pk %}"  style=" color : black; text-decoration: none" >Нет</a>
     </button>
 {% endblock %}

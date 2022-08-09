@@ -2,7 +2,9 @@ from django.urls import path
 
 from TODO_list.views.project_views import IndexProjectView, DetailProjectView, CreateProjectView, UpdateProjectView, \
     DeleteProjectView
-from TODO_list.views.tasks_views import  TaskView, CreateTask, DeleteTask, UpdateTask
+from TODO_list.views.tasks_views import TaskView, CreateTask, DeleteTask, UpdateTask
+
+app_name = 'TODO_list'
 
 urlpatterns = [
     path('', IndexProjectView.as_view(), name='list_project_view'),

@@ -4,10 +4,10 @@
 {% block nav %}
     {% if request.user.is_authenticated %}
     <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'update' task.pk %}">Редактировать</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:update' task.pk %}">Редактировать</a>
     </li>
     <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'delete' task.pk %}">Удалить</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:delete' task.pk %}">Удалить</a>
     </li>
     {% endif %}
 {% endblock %}
@@ -20,5 +20,5 @@
     <p>Тип: {% for type in task.types.all %}{{ type.type }}
                         {% endfor %}</p>
 
-     <a href="{% url "list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
+     <a href="{% url "TODO_list:list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}

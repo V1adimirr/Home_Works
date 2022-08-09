@@ -63,7 +63,7 @@ class CreateTask(CustomFormView):
         return super().form_valid(form)
 
     def get_redirect_url(self):
-        return redirect("view", pk=self.new_task.pk)
+        return redirect("TODO_list:view", pk=self.new_task.pk)
 
 
 class DeleteTask(View):
@@ -77,7 +77,7 @@ class DeleteTask(View):
         pk = kwargs.get('pk')
         task = get_object_or_404(TaskModel, pk=pk)
         task.delete()
-        return redirect("list_project_view")
+        return redirect("TODO_list:list_project_view")
 
 
 class UpdateTask(FormView):
@@ -92,7 +92,7 @@ class UpdateTask(FormView):
         return get_object_or_404(TaskModel, pk=self.kwargs.get("pk"))
 
     def get_success_url(self):
-        return reverse("view", kwargs={"pk": self.task.pk})
+        return reverse("TODO_list:view", kwargs={"pk": self.task.pk})
 
     def get_initial(self):
         initial = {}
@@ -103,7 +103,6 @@ class UpdateTask(FormView):
 
     def form_valid(self, form):
         type = form.cleaned_data.pop("types")
-        # self.task.objects.update(**form.cleaned_data) # так тоже работает.
         for key, value in form.cleaned_data.items():
             setattr(self.task, key, value)
         self.task.save()
