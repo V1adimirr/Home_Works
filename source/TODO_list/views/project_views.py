@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -19,7 +20,7 @@ class DetailProjectView(DetailView):
     model = Project
 
 
-class CreateProjectView(CreateView):
+class CreateProjectView(LoginRequiredMixin, CreateView):
     template_name = 'Projects/create_project.html'
     form_class = ProjectForm
 
