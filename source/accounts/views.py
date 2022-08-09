@@ -12,9 +12,12 @@ class UserRegisterView(CreateView):
     form_class = MyUserCreationForm
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect(self.get_success_url())
+        if self.request.POST.get('first_name') or self.request.POST.get('last_name'):
+            user = form.save()
+            login(self.request, user)
+            return redirect(self.get_success_url())
+        else:
+            return redirect('accounts:create_user')  # не удалось завершить валидацию
 
     def get_success_url(self):
         next_url = self.request.GET.get('next')
@@ -23,6 +26,7 @@ class UserRegisterView(CreateView):
         if not next_url:
             next_url = reverse('TODO_list:list_project_view')
         return next_url
+
 
 def login_view(request):
     context = {}
