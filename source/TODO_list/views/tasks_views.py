@@ -1,12 +1,11 @@
 from django.db.models.query_utils import Q
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import redirect, reverse
+from django.urls import reverse_lazy
 from django.utils.http import urlencode
-from django.views.generic.base import View
-from django.views.generic import FormView, ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from TODO_list.forms import TaskForm, SearchForm
 from TODO_list.models import TaskModel
-from TODO_list.base_view import FormView as CustomFormView
 
 
 class IndexView(ListView):
@@ -43,16 +42,12 @@ class IndexView(ListView):
             return self.form.cleaned_data.get("search")
 
 
-class TaskView(View):
-
-    def get(self, request, **kwargs):
-        pk = kwargs.get("pk")
-        task = get_object_or_404(TaskModel, pk=pk)
-        kwargs["task"] = task
-        return render(request, "Tasks/task_view.html", kwargs)
+class TaskView(DetailView):
+    template_name = 'Tasks/task_view.html'
+    model = TaskModel
 
 
-class CreateTask(CustomFormView):
+class CreateTask(CreateView):
     form_class = TaskForm
     template_name = "Tasks/task_create.html"
 
@@ -66,45 +61,18 @@ class CreateTask(CustomFormView):
         return redirect("TODO_list:view", pk=self.new_task.pk)
 
 
-class DeleteTask(View):
-
-    def get(self, request, **kwargs):
-        pk = kwargs.get('pk')
-        task = get_object_or_404(TaskModel, pk=pk)
-        return render(request, "Tasks/task_delete.html", {"task": task})
-
-    def post(self, request, **kwargs):
-        pk = kwargs.get('pk')
-        task = get_object_or_404(TaskModel, pk=pk)
-        task.delete()
-        return redirect("TODO_list:list_project_view")
+class DeleteTask(DeleteView):
+    template_name = 'Tasks/task_delete.html'
+    model = TaskModel
+    context_object_name = 'task'
+    success_url = reverse_lazy('TODO_list:list_project_view')
 
 
-class UpdateTask(FormView):
+class UpdateTask(UpdateView):
+    model = TaskModel
+    template_name = 'Tasks/task_update.html'
     form_class = TaskForm
-    template_name = "Tasks/task_update.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        self.task = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_object(self):
-        return get_object_or_404(TaskModel, pk=self.kwargs.get("pk"))
+    context_key = 'task'
 
     def get_success_url(self):
-        return reverse("TODO_list:view", kwargs={"pk": self.task.pk})
-
-    def get_initial(self):
-        initial = {}
-        for key in "short_de", "description", "status", "types":
-            initial[key] = getattr(self.task, key)
-        initial['types'] = self.task.types.all()
-        return initial
-
-    def form_valid(self, form):
-        type = form.cleaned_data.pop("types")
-        for key, value in form.cleaned_data.items():
-            setattr(self.task, key, value)
-        self.task.save()
-        self.task.types.set(type)
-        return super().form_valid(form)
+        return reverse('TODO_list:detail_project_view', kwargs={'pk': self.object.pk})

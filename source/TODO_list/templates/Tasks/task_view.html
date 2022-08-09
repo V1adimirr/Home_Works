@@ -4,10 +4,10 @@
 {% block nav %}
     {% if request.user.is_authenticated %}
     <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:update' task.pk %}">Редактировать</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:update' object.pk %}">Редактировать</a>
     </li>
     <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:delete' task.pk %}">Удалить</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:delete' object.pk %}">Удалить</a>
     </li>
     {% endif %}
 {% endblock %}
