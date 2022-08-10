@@ -1,23 +1,48 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, render
+from django.db.models import Q
 from django.urls import reverse, reverse_lazy
+from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from TODO_list.forms import ProjectForm
+from TODO_list.forms import ProjectForm, SearchForm
 from TODO_list.models import Project
 
 
 class IndexProjectView(ListView):
     template_name = 'Projects/list_project_view.html'
     context_object_name = 'projects'
+    paginate_by = 4
+
+    def get(self, request, *args, **kwargs):
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context["form"] = self.form
+        if self.search_value:
+            query = urlencode({"search": self.search_value})
+            context["query"] = query
+        return context
 
     def get_queryset(self):
+        if self.search_value:
+            return Project.objects.filter(Q(name_project__icontains=self.search_value))
         return Project.objects.all()
+
+    def get_search_form(self):
+        return SearchForm(self.request.GET)
+
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data.get("search")
 
 
 class DetailProjectView(DetailView):
     template_name = 'Projects/detail_project_view.html'
     model = Project
+    context_object_name = 'project'
 
 
 class CreateProjectView(LoginRequiredMixin, CreateView):
