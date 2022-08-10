@@ -1,24 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}Просмотр Задачи{% endblock %}
-{% block nav %}
-    {% if request.user.is_authenticated %}
-    <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:update' object.pk %}">Редактировать</a>
-    </li>
-    <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:delete' object.pk %}">Удалить</a>
-    </li>
-    {% endif %}
-{% endblock %}
+{% block title %}Просмотр Задач{% endblock %}
 
-{% block content %}
-    <br/><h3>{{ task.short_de }}</h3><br/>
-    <p>Задача: {{ task.short_de }}</p>
-    <p>Описание: {{ task.description }}</p><br/>
-    <p>Статус: {{ task.status }}</p><br/>
-    <p>Тип: {% for type in task.types.all %}{{ type.type }}
+
+{% block content %}<br/>
+     <div class="row">
+     {% for project in project %}
+    <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ project.short_de }}</h3><br/>
+                        <p>Задача: {{ project.short_de }}</p>
+                        <p>Описание: {{ project.description }}</p><br/>
+                        <p>Статус: {{ project.status }}</p><br/>
+                        <p>{% for type in project.types.all %}
+                            {% if type.type %}
+                             Тип: {{ type.type }}
+                            {% endif %}
                         {% endfor %}</p>
+                        {% if request.user.is_authenticated %}
+                        <a class="nav-link active" aria-current="page"
+                         href="{% url 'TODO_list:update' project.pk %}" style="color: darkorange;
+                         text-decoration: none">Редактировать</a>
+                        <a class="nav-link active" aria-current="page"
+                         href="{% url 'TODO_list:delete' project.pk %}" style="color: darkorange;
+                         text-decoration: none">Удалить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div><br/>
+    <div><li>
+        <a href="{% url "TODO_list:list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
+    </li><br/>
+    </div>
 
-     <a href="{% url "TODO_list:list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
+
 {% endblock %}
+

@@ -3,7 +3,7 @@
 {%  block nav %}
     {% if request.user.is_authenticated %}
      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url "TODO_list:create" %}">Создать задачу</a>
+          <a class="nav-link active" aria-current="page" href="{% url "TODO_list:create" pk %}">Создать задачу</a>
         </li>
     {% endif %}
 {% endblock %}

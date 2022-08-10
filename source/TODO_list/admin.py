@@ -13,7 +13,7 @@ admin.site.register(Project, ProjectAdmin)
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['short_de', 'status']
+    list_display = ['short_de', 'status', 'project']
     list_filter = ['status']
     search_fields = ['status', 'type']
     fields = ['short_de', 'description', 'status', 'created_at', 'updated_at', 'project']

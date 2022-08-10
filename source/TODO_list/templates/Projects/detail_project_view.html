@@ -4,7 +4,7 @@
 {% block nav %}
     {% if request.user.is_authenticated %}
      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:create'  %}">Добавить задачу</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:create' project.pk %}">Добавить задачу</a>
     </li>
     <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:update_project' project.pk %}">Изменить проект</a>

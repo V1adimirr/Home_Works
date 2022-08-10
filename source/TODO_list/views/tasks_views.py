@@ -1,11 +1,9 @@
-from django.db.models.query_utils import Q
-from django.shortcuts import redirect, reverse
+from django.shortcuts import  reverse, get_object_or_404
 from django.urls import reverse_lazy
-from django.utils.http import urlencode
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
-from TODO_list.forms import TaskForm, SearchForm
-from TODO_list.models import TaskModel
+from TODO_list.forms import TaskForm
+from TODO_list.models import TaskModel, Project
 
 
 class IndexView(ListView):
@@ -13,52 +11,31 @@ class IndexView(ListView):
     template_name = "Tasks/index.html"
     context_object_name = "tasks"
     ordering = ("-updated_at",)
-    paginate_by = 6
-
-    def get(self, request, *args, **kwargs):
-        self.form = self.get_search_form()
-        self.search_value = self.get_search_value()
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        context["form"] = self.form
-        if self.search_value:
-            query = urlencode({"search": self.search_value})
-            context["query"] = query
-        return context
-
-    def get_queryset(self):
-        if self.search_value:
-            return TaskModel.objects.filter(Q(short_de__icontains=self.search_value) |
-                                            Q(description__icontains=self.get_search_value()))
-        return TaskModel.objects.all()
-
-    def get_search_form(self):
-        return SearchForm(self.request.GET)
-
-    def get_search_value(self):
-        if self.form.is_valid():
-            return self.form.cleaned_data.get("search")
+    paginate_by = 4
 
 
 class TaskView(DetailView):
     template_name = 'Tasks/task_view.html'
-    model = TaskModel
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['project'] = self.object.project.order_by()
+        return context
 
 
 class CreateTask(CreateView):
     form_class = TaskForm
     template_name = "Tasks/task_create.html"
+    model = Project
 
     def form_valid(self, form):
-        type = form.cleaned_data.pop("types")
-        self.new_task = TaskModel.objects.create(**form.cleaned_data)
-        self.new_task.types.set(type)
+        project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+        form.instance.project = project
         return super().form_valid(form)
 
-    def get_redirect_url(self):
-        return redirect("TODO_list:view", pk=self.new_task.pk)
+    def get_success_url(self):
+        return reverse("TODO_list:view", kwargs={"pk": self.object.project.pk})
 
 
 class DeleteTask(DeleteView):
@@ -69,10 +46,10 @@ class DeleteTask(DeleteView):
 
 
 class UpdateTask(UpdateView):
-    model = TaskModel
-    template_name = 'Tasks/task_update.html'
     form_class = TaskForm
+    template_name = 'Tasks/task_update.html'
+    model = TaskModel
     context_key = 'task'
 
     def get_success_url(self):
-        return reverse('TODO_list:detail_project_view', kwargs={'pk': self.object.pk})
+        return reverse('TODO_list:detail_project_view', kwargs={'pk': self.object.project.pk})
