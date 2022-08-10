@@ -1,4 +1,4 @@
-from django.shortcuts import  reverse, get_object_or_404
+from django.shortcuts import reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
@@ -31,7 +31,9 @@ class CreateTask(CreateView):
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+        print(project.pk)
         form.instance.project = project
+        print(form.instance)
         return super().form_valid(form)
 
     def get_success_url(self):
