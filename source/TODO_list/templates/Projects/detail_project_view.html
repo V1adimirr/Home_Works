@@ -24,8 +24,7 @@
     {% else %}
     <p>Дата окончания: {{ '-- -- --' }}</p><br/>
     {% endif %}
-    <p><a href="{% url 'TODO_list:view' project.pk %}" style=" color : darkorange; text-decoration: none">
-        <strong> Задачи: </strong> {{ projects.objects}} </a></p>
-
+    <p><a href="{% url 'TODO_list:view' project.pk %}" style=" color : darkorange;
+    text-decoration: none"><strong style="color: darkorange">Задачи: </strong></a></p>
      <a href="{% url 'TODO_list:list_project_view' %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}
