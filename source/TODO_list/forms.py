@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import widgets
+from django.contrib.auth import get_user_model
 
 from TODO_list.models import TaskModel, Project
 
@@ -40,4 +41,13 @@ class ProjectForm(forms.ModelForm):
             "created_time": forms.SelectDateWidget,
             "updated_time": forms.SelectDateWidget,
 
+        }
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['users']
+        widgets = {
+            'users': forms.CheckboxSelectMultiple,
         }
