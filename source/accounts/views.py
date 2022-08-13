@@ -8,7 +8,7 @@ from accounts.forms import MyUserCreationForm
 
 class UserRegisterView(CreateView):
     model = User
-    template_name = 'create_user.html'
+    template_name = 'Accounts/create_user.html'
     form_class = MyUserCreationForm
 
     def form_valid(self, form):
@@ -39,9 +39,10 @@ def login_view(request):
             return redirect('TODO_list:list_project_view')
         else:
             context['has_error'] = True
-    return render(request, 'login.html', context=context)
+    return render(request, 'Accounts/login.html', context=context)
 
 
 def logout_view(request):
     logout(request)
     return redirect('TODO_list:list_project_view')
+

@@ -6,7 +6,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ['name_project', 'created_time', 'updated_time']
     list_filter = ['name_project']
     search_fields = ['name_project', 'created_time']
-    fields = ['name_project', 'project_de', 'created_time', 'updated_time']
+    fields = ['name_project', 'project_de', 'created_time', 'updated_time', 'users']
 
 
 admin.site.register(Project, ProjectAdmin)
@@ -37,3 +37,4 @@ class StatusAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Status, StatusAdmin)
+

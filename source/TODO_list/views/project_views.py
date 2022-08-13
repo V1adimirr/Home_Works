@@ -44,6 +44,11 @@ class DetailProjectView(DetailView):
     model = Project
     context_object_name = 'project'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = self.object.users.order_by()
+        return context
+
 
 class CreateProjectView(LoginRequiredMixin, CreateView):
     template_name = 'Projects/create_project.html'

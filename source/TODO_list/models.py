@@ -1,4 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
 
 
 class BaseModel(models.Model):
@@ -33,6 +35,7 @@ class Project(models.Model):
     project_de = models.TextField(max_length=1000, verbose_name="Описание проекта")
     created_time = models.DateField(verbose_name="Дата создания")
     updated_time = models.DateField(null=True, blank=True, verbose_name="Дата окончания")
+    users = models.ManyToManyField(get_user_model(), related_name='user', verbose_name='Пользователи')
 
     def __str__(self):
         return f"{self.id}. {self.name_project} : {self.created_time}"
@@ -75,3 +78,4 @@ class Status(BaseModel):
         db_table = 'Status'
         verbose_name = 'Статус'
         verbose_name_plural = 'Статусы'
+

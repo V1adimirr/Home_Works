@@ -26,5 +26,11 @@
     {% endif %}
     <p><a href="{% url 'TODO_list:view' project.pk %}" style=" color : darkorange;
     text-decoration: none"><strong style="color: darkorange">Задачи: </strong></a></p>
+    <p><strong style="color: darkorange">Участники проекта: </strong></p>
+    <p>
+        {% for user in users %}
+            {{ user }}
+        {% endfor %}
+    </p>
      <a href="{% url 'TODO_list:list_project_view' %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}
