@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
@@ -50,25 +50,34 @@ class DetailProjectView(DetailView):
         return context
 
 
-class CreateProjectView(LoginRequiredMixin, CreateView):
+class CreateProjectView(PermissionRequiredMixin, CreateView):
     template_name = 'Projects/create_project.html'
     form_class = ProjectForm
+    permission_required = 'TODO_list.add_project'
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.user = user
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('TODO_list:detail_project_view', kwargs={'pk': self.object.pk})
 
-class UpdateProjectView(UpdateView):
+
+class UpdateProjectView(PermissionRequiredMixin, UpdateView):
     model = Project
     template_name = 'Projects/update_project.html'
     form_class = ProjectForm
     context_key = 'project'
+    permission_required = 'TODO_list.change_project'
 
     def get_success_url(self):
         return reverse('TODO_list:detail_project_view', kwargs={'pk': self.object.pk})
 
 
-class DeleteProjectView(DeleteView):
+class DeleteProjectView(PermissionRequiredMixin, DeleteView):
     template_name = 'Projects/delete_project.html'
     model = Project
     context_object_name = 'project'
     success_url = reverse_lazy('TODO_list:list_project_view')
+    permission_required = 'TODO_list.delete_project'

@@ -7,7 +7,7 @@
 {% block content %}
     <h3>Добавление участника</h3>
     <form action="" method="post">
-        {% include "partial/form.html" with button_text="Добавить" %}
+        {% include "partial/form.html" with button_text="Изменить" %}
     </form>
     <a href="{% url "TODO_list:list_project_view" %}" style=" color : darkorange; text-decoration: none">На главную</a>
 {% endblock %}

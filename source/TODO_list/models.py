@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 
-
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
@@ -78,4 +77,3 @@ class Status(BaseModel):
         db_table = 'Status'
         verbose_name = 'Статус'
         verbose_name_plural = 'Статусы'
-

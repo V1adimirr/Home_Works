@@ -13,7 +13,7 @@
           <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:delete_project' project.pk %}">Удалить проект</a>
     </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:create_user' project.pk %}">Добавить участника</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:create_user' project.pk %}">Управление участниками</a>
     </li>
     {% endif %}
 {% endblock %}
@@ -32,9 +32,7 @@
     <p><strong style="color: darkorange">Участники проекта: </strong></p>
     <p>
         {% for user in users %}
-           {{ user }}
-            <button type="button" class="btn btn-warning">
-                <a href="{% url 'TODO_list:delete_user' user.pk %}" style="text-decoration: none">{{ user.pk }} Удалить</a></button><br/><br/>
+           {{ user }}<br/>
         {% endfor %}
     </p>
      <a href="{% url 'TODO_list:list_project_view' %}" style=" color : darkorange; text-decoration: none">На главную</a>

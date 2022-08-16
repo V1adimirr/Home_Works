@@ -2,7 +2,7 @@
 {% block title %}Проекты{% endblock %}
 {%  block nav %}
     {% if request.user.is_authenticated %}
-        <li class="nav-link active" style="color: brown">Привет {{ user }}</></li>
+        <li class="nav-link active" style="color: brown">Привет {{ user }}</li>
 
      <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'TODO_list:create_project' %}">Добавить проект</a>
